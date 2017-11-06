@@ -3,9 +3,7 @@ class RecipeSearch::CLI
   def call
     list_categories
     menu_categories
-  #  list_recipes
-  #  menu_recipes
-  #  end_recipe_search
+
   end
 
   def list_categories
