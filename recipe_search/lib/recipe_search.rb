@@ -1,5 +1,2 @@
-require "recipe_search/version"
-
-module RecipeSearch
-  # Your code goes here...
-end
+require_relative "./recipe_search/version"
+require_relative './recipe_search/cli'

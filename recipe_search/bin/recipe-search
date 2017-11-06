@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 
-puts "Hello World"
+require './lib/recipe_search'
+RecipeSearch::CLI.new.call
