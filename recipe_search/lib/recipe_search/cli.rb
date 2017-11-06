@@ -9,12 +9,9 @@ class RecipeSearch::CLI
   def list_categories
     puts "Recipe Search by Food Category"
     #here doc - bunch of text
-    puts <<-DOC.gsub /^\s*/, ''
-      1. Desserts
-      2. Chicken
-      3. Kids
-    DOC
+    RecipeSearch::Cat_scraper.categories
   end
+
 
   def menu_categories
     input = nil
