@@ -3,13 +3,16 @@ class RecipeSearch::CLI
   def call
     list_categories
     menu_categories
-
+    end_recipe_search
   end
 
   def list_categories
     puts "Recipe Search by Food Category"
-    #here doc - bunch of text
-    RecipeSearch::Cat_scraper.categories
+
+  @foodcat =  RecipeSearch::Cat_scraper.categories
+    @foodcat.each.with_index(1) do |cat,i|
+      puts "#{i}. #{cat.name}"
+    end
   end
 
 
@@ -18,24 +21,11 @@ class RecipeSearch::CLI
     while input != "exit"
       puts "Enter the number of the recipe category or 'exit' to quit or 'list' to view categories again:"
       input = gets.strip.downcase
-      case input
-      when "1"
-        puts "Here are the dessert recipes"
-        list_recipes
-        menu_recipes
 
-      when "2"
-        puts "Here are the chicken recipes"
-        list_recipes
-        menu_recipes
-      when "3"
-        puts "Here are the kids recipes"
-        list_recipes
-        menu_recipes
-
-      when "exit"
-        end_recipe_search
-      when "list"
+      if input.to_i > 0
+        the_cat = @foodcat[input.to_i-1]
+        puts "#{the_cat.name}"
+      elsif input.to_i == "list"
         list_categories
       else
         puts "Please enter the number of the recipe category you wish to see"
