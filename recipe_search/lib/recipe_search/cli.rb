@@ -8,10 +8,9 @@ class RecipeSearch::CLI
 
   def list_categories
     puts "Recipe Search by Food Category"
-
-  @foodcat =  RecipeSearch::Cat_scraper.categories
-    @foodcat.each.with_index(1) do |cat,i|
-      puts "#{i}. #{cat.name}"
+    categories = RecipeSearch::Cat_scraper.categories
+    categories.each.with_index(1) do |category, i|
+      puts "#{i}. #{category[:name]}"
     end
   end
 
