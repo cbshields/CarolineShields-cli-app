@@ -1,11 +1,11 @@
 class RecipeSearch::Recipe
 
 attr_accessor :name, :ingredients, :steps, :url
+@@ingredient_list = []
+@@list_steps = []
 
-@@recipe_info = []
 def self.scrape_recipe(url)
-  ingredient_list = []
-  list_steps = []
+
   doc = Nokogiri::HTML(open(url))
 
   #getting ingredients
@@ -23,5 +23,11 @@ def self.scrape_recipe(url)
   binding.pry
 end
 
+  recipe = self.new
+  recipe.ingredients = @@ingredient_list
+  recipe.steps = @@list_steps
+  recipe.name = doc.search("h1.entry-title").text
+  recipe.url = url
+  recipe
 
 end #ends Recipe class
