@@ -28,7 +28,7 @@ class RecipeSearch::CLI
         @recipe_list = RecipeSearch::Scraper.recipe_cat(the_cat_url)
         list_recipes
         recipe_choices
-      elsif input.to_i == "list"
+      elsif input == "list"
         list_categories
       else
         puts "Please enter the number of the recipe category you wish to see"
@@ -37,10 +37,14 @@ class RecipeSearch::CLI
   end
 
   def list_recipes
-    @recipe_list.each.with_index(1) do |list, i|
-      puts "#{i}. #{list[:recipe_name]}"
+    if !@recipe_list.empty?
+        @recipe_list.each.with_index(1) do |list, i|
+          puts "#{i}. #{list[:recipe_name]}"
+        end
+    else
+      puts "There are no recipes for this category. Please select another category:"
+      list_categories
     end
-
   end
 
   def recipe_choices
@@ -71,9 +75,8 @@ class RecipeSearch::CLI
   end
 
 def recipe_info(recipe_info_url)
-  RecipeSearch::Recipe.scrape_recipe(recipe_info_url)
-
-
+  recipe = RecipeSearch::Recipe.scrape_recipe(recipe_info_url)
+  binding.pry
 end
 
 
