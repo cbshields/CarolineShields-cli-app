@@ -1,12 +1,11 @@
 class RecipeSearch::Recipe
 
 attr_accessor :name, :ingredients, :steps, :url
-@@ingredient_list = []
-@@list_steps = []
 
 def self.scrape_recipe(url)
-
   doc = Nokogiri::HTML(open(url))
+  ingredient_list = []
+  list_steps = []
 
   #getting ingredients
   doc.search("ul.td-arrow-list li").each do |ingred|
@@ -15,19 +14,27 @@ def self.scrape_recipe(url)
   end
 
   #getting directions span.dropcap
-  doc.search("h3.Directions p").each do |step|
-    #how do I get the directions
-    instr = step.text
-    list_steps << instr
+  doc.search(".td-post-content p").collect do |p|
+    text = p.text
+    binding.pry
+    if text != "Ingredients:" || text != " "
+      binding.pry
+      until text[0].to_i == 0
+          text = text[1..-1]
+      end
+      list_steps << text
+    end
   end
-  binding.pry
-end
 
+  binding.pry
   recipe = self.new
-  recipe.ingredients = @@ingredient_list
-  recipe.steps = @@list_steps
+  recipe.ingredients = ingredient_list
+  recipe.steps = list_steps
   recipe.name = doc.search("h1.entry-title").text
   recipe.url = url
   recipe
+end
+
+
 
 end #ends Recipe class

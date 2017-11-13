@@ -56,13 +56,13 @@ class RecipeSearch::CLI
         the_recipe_info = @recipe_list[input.to_i-1]
         the_recipe_info_url = the_recipe_info[:recipe_url]
         recipe_info(the_recipe_info_url)
-      elsif input.to_i == "list"
+      elsif input == "list"
         list_recipes
-      elsif "exit"
+      elsif input == "exit"
         #comment out list_categories when figure out exit code
         end_recipe_search
         #list_categories
-      elsif "back"
+      elsif input == "back"
         list_categories
       else
         puts "Please enter the number of the recipe category you wish to see"
