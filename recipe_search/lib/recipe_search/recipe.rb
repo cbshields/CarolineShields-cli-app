@@ -12,7 +12,6 @@ def self.scrape_recipe(url)
   doc.search(".td-recipe-info").each do |preptime|
     prep_time << preptime.text
   end
-  binding.pry
 
 
   #getting ingredients
