@@ -1,8 +1,9 @@
 # RecipeSearch
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/recipe_search`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to the Recipe Search gem. This application will show you several different types of recipe categories to choose from (Vegan, Seafood, Beef, Baby, etc) and then the recipes found under each
+category. You can select the recipe you want and it will give you the name, time it takes to make the meal, the ingredients and the directions.
 
-TODO: Delete this and the text above, and describe your gem
+After you have viewed the recipe, you may type exit or type list or back to get the recipe list again or choose from a different food category.
 
 ## Installation
 
@@ -20,9 +21,6 @@ Or install it yourself as:
 
     $ gem install recipe_search
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
