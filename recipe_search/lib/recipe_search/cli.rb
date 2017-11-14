@@ -3,6 +3,9 @@ class RecipeSearch::CLI
   def call
     list_categories
     menu_categories
+    #list_recipes
+    #recipe_choices
+    #recipe_info
     end_recipe_search
   end
 
@@ -45,20 +48,22 @@ class RecipeSearch::CLI
         @recipe_list.each.with_index(1) do |list, i|
           puts "#{i}. #{list[:recipe_name]}"
         end
+        #recipe_choices
   end
 
   def recipe_choices
 
     input = nil
     while input != "exit"
+
       #figure out code to exit completely out of program
       #puts "Enter the number of the recipe would you like to see, 'exit' to quit program, 'back' to see the recipe categories or 'list' to view categories again:"
       puts "Enter the number of the recipe would you like to see, 'back' to see the recipe categories,'list' to view categories again or 'exit':"
       input = gets.strip.downcase
       if input.to_i > 0
         the_recipe_info = @recipe_list[input.to_i-1]
-        the_recipe_info_url = the_recipe_info[:recipe_url]
-        recipe_info(the_recipe_info_url)
+        @the_recipe_info_url = the_recipe_info[:recipe_url]
+        recipe_info
       elsif input == "list"
         list_recipes
       elsif input == "back"
@@ -66,11 +71,12 @@ class RecipeSearch::CLI
       else
         puts "Please enter the number of the recipe you wish to see"
       end
-    end
+
+    end #ends while loop
   end
 
-  def recipe_info(recipe_info_url)
-    recipe = RecipeSearch::Recipe.scrape_recipe(recipe_info_url)
+  def recipe_info
+    recipe = RecipeSearch::Recipe.scrape_recipe(@the_recipe_info_url)
     puts " "
     puts "Name: #{recipe.name}"
     puts "#{recipe.prep}"

@@ -1,5 +1,5 @@
 class RecipeSearch::Scraper
-  attr_accessor :name, :cat_url
+  attr_accessor :name, :cat_url, :recipe_name, :recipe_url
 
   def self.categories
     #pull categories from food recipe seach site
