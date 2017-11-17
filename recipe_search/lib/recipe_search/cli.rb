@@ -95,12 +95,16 @@ class RecipeSearch::CLI
         puts "- #{list}"
       end
    puts " "
-   puts "Directions:"
+   recipe.steps.each.with_index(0) do |list, i|
+     if i == 0
+       puts "Directions: #{list}"
+       puts "==================================================="
+       #puts "#{list}"
+     else
+     puts "#{i}. #{list}"
+    end
+  end
    puts "==================================================="
-     recipe.steps.each.with_index(1) do |list, i|
-       puts "#{i}. #{list}"
-     end
-   puts " "
    puts " "
   end
 
