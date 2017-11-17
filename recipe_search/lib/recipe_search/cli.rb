@@ -1,7 +1,7 @@
 class RecipeSearch::CLI
 
   def call
-    list_categories
+    #list_categories
     menu_categories
     #list_recipes
     #recipe_choices
@@ -21,6 +21,7 @@ class RecipeSearch::CLI
   def menu_categories
     input = nil
     while input != "exit"
+      list_categories
       puts "Enter the number of the recipe category or 'exit' to quit or 'list' to view categories again:"
       input = gets.strip.downcase
 
@@ -34,7 +35,7 @@ class RecipeSearch::CLI
           else
             puts "#{the_cat[:name]}"
             list_recipes
-            recipe_choices
+            input = recipe_choices
           end
       elsif input == "list"
         list_categories
@@ -54,8 +55,8 @@ class RecipeSearch::CLI
   def recipe_choices
 
     input = nil
-    while input != "exit"
-
+    while input != "exit" && input != "back"
+      list_recipes
       #figure out code to exit completely out of program
       #puts "Enter the number of the recipe would you like to see, 'exit' to quit program, 'back' to see the recipe categories or 'list' to view categories again:"
       puts "Enter the number of the recipe would you like to see, 'back' to see the recipe categories,'list' to view categories again or 'exit':"
@@ -64,15 +65,14 @@ class RecipeSearch::CLI
         the_recipe_info = @recipe_list[input.to_i-1]
         @the_recipe_info_url = the_recipe_info[:recipe_url]
         recipe_info
-      elsif input == "list"
-        list_recipes
-      elsif input == "back"
-        list_categories
+
+
       else
         puts "Please enter the number of the recipe you wish to see"
       end
-
+      input
     end #ends while loop
+
   end
 
   def recipe_info

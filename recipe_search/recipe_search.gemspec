@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["'Caroline Shields'"]
   spec.email         = ["'caroline.shields@amkor.com'"]
 
-  spec.summary       = "This is for my CLI project"
-  spec.description   = "CLI project"
+  spec.summary       = %q{"This is for my CLI project"}
+  spec.description   = %q{"CLI Project"}
   spec.homepage      = "http://github.com"
   spec.license       = "MIT"
 
@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
     f.match(%r{^(test|spec|features)/})
   end
   spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.executables   = [recipe-search]#spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.14"
