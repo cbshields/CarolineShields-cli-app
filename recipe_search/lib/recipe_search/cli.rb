@@ -1,16 +1,13 @@
 class RecipeSearch::CLI
 
   def call
-    #list_categories
+
     menu_categories
-    #list_recipes
-    #recipe_choices
-    #recipe_info
-    #end_recipe_search
+
   end
 
   def list_categories
-    puts "Recipe Search by Food Category"
+    puts "Search by Recipe Category"
     @categories = RecipeSearch::Scraper.categories
     @categories.each.with_index(1) do |category, i|
       puts "#{i}. #{category[:name]}"
@@ -22,7 +19,7 @@ class RecipeSearch::CLI
     input = nil
     while input != "exit"
       list_categories
-      puts "Enter the number of the recipe category or 'exit' to quit or 'list' to view categories again:"
+      puts "Enter the number of the recipe category, 'list' to view the recipe categories again, or 'exit' to stop the search:"
       input = gets.strip.downcase
 
       if input.to_i > 0
@@ -36,14 +33,14 @@ class RecipeSearch::CLI
             puts "#{the_cat[:name]}"
             list_recipes
             input = recipe_choices
-            #binding.pry
+
           end
       elsif input == "list"
         list_categories
       elsif input == "exit"
         end_recipe_search
       else
-        puts "Please enter the number of the recipe category you wish to see"
+        puts "Please enter the number of the recipe category:"
       end
     end #while loop
   end #ends menu_categories
@@ -52,7 +49,7 @@ class RecipeSearch::CLI
         @recipe_list.each.with_index(1) do |list, i|
           puts "#{i}. #{list[:recipe_name]}"
         end
-        #recipe_choices
+
   end
 
   def recipe_choices
@@ -61,7 +58,7 @@ class RecipeSearch::CLI
     while input != "exit" && input != "list"
       #figure out code to exit completely out of program
       #puts "Enter the number of the recipe would you like to see, 'exit' to quit program, 'back' to see the recipe categories or 'list' to view categories again:"
-      puts "Enter the number of the recipe would you like to see, 'back' to see the recipe categories,'list' to view the food categories or 'exit':"
+      puts "Enter the number of the recipe, 'back' to view the recipes, 'list' to view the recipe categories or 'exit' to stop the search:"
       input = gets.strip.downcase
       if input.to_i > 0
         the_recipe_info = @recipe_list[input.to_i-1]
@@ -79,7 +76,7 @@ class RecipeSearch::CLI
       if input == "exit"
         return input
       end
-      #binding.pry
+
     end #ends while loop
 
   end
@@ -99,7 +96,6 @@ class RecipeSearch::CLI
      if i == 0
        puts "Directions: #{list}"
        puts "==================================================="
-       #puts "#{list}"
      else
      puts "#{i}. #{list}"
     end
