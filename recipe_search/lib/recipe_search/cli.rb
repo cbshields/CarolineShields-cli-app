@@ -19,7 +19,7 @@ class RecipeSearch::CLI
     input = nil
     while input != "exit"
       list_categories
-      puts "Enter the number of the recipe category, 'list' to view the recipe categories again, or 'exit' to stop the search:"
+      puts "Enter the number of the recipe category, 'list' to view the recipe categories, or 'exit' to stop the search:"
       input = gets.strip.downcase
 
       if input.to_i > 0
@@ -28,19 +28,17 @@ class RecipeSearch::CLI
         @recipe_list = RecipeSearch::Scraper.recipe_cat(the_cat_url)
           if @recipe_list.empty?
             puts "There are no recipes for this category."
-            list_categories
           else
             puts "#{the_cat[:name]}"
             list_recipes
             input = recipe_choices
-
           end
       elsif input == "list"
-        list_categories
+        ""
       elsif input == "exit"
         end_recipe_search
       else
-        puts "Please enter the number of the recipe category:"
+        puts "You entered an invalid entry."
       end
     end #while loop
   end #ends menu_categories
@@ -55,23 +53,21 @@ class RecipeSearch::CLI
   def recipe_choices
 
     input = nil
+
     while input != "exit" && input != "list"
-      #figure out code to exit completely out of program
-      #puts "Enter the number of the recipe would you like to see, 'exit' to quit program, 'back' to see the recipe categories or 'list' to view categories again:"
-      puts "Enter the number of the recipe, 'back' to view the recipes, 'list' to view the recipe categories or 'exit' to stop the search:"
+
+      puts "Enter the number of the recipe, 'list' to view the recipe categories or 'exit' to stop the search:"
       input = gets.strip.downcase
       if input.to_i > 0
         the_recipe_info = @recipe_list[input.to_i-1]
         @the_recipe_info_url = the_recipe_info[:recipe_url]
         recipe_info
-      elsif input == "back"
         list_recipes
+      elsif input == "list"
+        ""
       elsif input == "exit"
         end_recipe_search
-      elsif input == "list"
-        menu_categories
-      else
-        puts "Please enter the number of the recipe you wish to see"
+      else puts "You have entered an invalid entry."
       end
       if input == "exit"
         return input
@@ -102,6 +98,7 @@ class RecipeSearch::CLI
   end
    puts "==================================================="
    puts " "
+   puts "Here are the other recipes:"
   end
 
   def end_recipe_search
