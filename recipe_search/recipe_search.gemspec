@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
     f.match(%r{^(test|spec|features)/})
   end
   spec.bindir        = "exe"
-  spec.executables   = [recipe-search]#spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) } #[recipe-search]
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.14"
