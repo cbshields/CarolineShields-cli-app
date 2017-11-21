@@ -19,9 +19,7 @@ class RecipeSearch::Scraper
 
   def self.recipe_cat(cat_url)
     doc = Nokogiri::HTML(open(cat_url))
-    binding.pry
     doc.search("h3.entry-title").map do |recipe|
-      binding.pry
       title = recipe.text
       url = recipe.at('a')['href']
       {:recipe_name=>title,:recipe_url=>url}
