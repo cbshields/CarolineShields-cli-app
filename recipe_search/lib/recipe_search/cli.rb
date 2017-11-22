@@ -8,13 +8,12 @@ class RecipeSearch::CLI
 
   def list_categories
     @categories = RecipeSearch::Scraper.categories
+    binding.pry
     puts "Search by Recipe Category"
     @categories.each.with_index(1) do |category, i|
-      @ubound_index = i
+      @cat_ubound_index = i
       puts "#{i}. #{category[:name]}"
     end
-
-    binding.pry
   end
 
 
@@ -25,7 +24,7 @@ class RecipeSearch::CLI
       puts "Enter the number of the recipe category, 'list' to view the recipe categories, or 'exit' to stop the search:"
       input = gets.strip.downcase
 
-      if input.to_i > 0 && input.to_i <= @ubound_index
+      if input.to_i > 0 && input.to_i <= @cat_ubound_index
         the_cat = @categories[input.to_i-1]
         the_cat_url = the_cat[:cat_url]
         @recipe_list = RecipeSearch::Scraper.recipe_cat(the_cat_url)
@@ -49,6 +48,7 @@ class RecipeSearch::CLI
 
   def list_recipes
         @recipe_list.each.with_index(1) do |list, i|
+          @recipe_ubound_index = i
           puts "#{i}. #{list[:recipe_name]}"
         end
 
@@ -62,7 +62,7 @@ class RecipeSearch::CLI
 
       puts "Enter the number of the recipe, 'list' to view the recipe categories or 'exit' to stop the search:"
       input = gets.strip.downcase
-      if input.to_i > 0
+      if input.to_i > 0 && input.to_i <= @recipe_ubound_index
         the_recipe_info = @recipe_list[input.to_i-1]
         @the_recipe_info_url = the_recipe_info[:recipe_url]
         recipe_info

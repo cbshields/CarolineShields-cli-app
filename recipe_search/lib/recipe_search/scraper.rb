@@ -2,19 +2,26 @@ class RecipeSearch::Scraper
   attr_accessor :recipe
 
   def self.categories
+    food_cat = []
     #pull categories from food recipe seach site
     doc = Nokogiri::HTML(open("http://foodrecipesearch.com/"))
+
+
+    #pulls in the categories twice
       doc.search("ul.sub-menu li").map do |category|
         cat = category.text
         url = category.at('a')['href']
         {:name=>cat,:cat_url=>url}
+        #food_cat << {:name=>cat,:cat_url=>url}
 
-      #the below code adds a minute to processing time and it adds "nil" as an entry, why?
+      #the below code adds a minute to processing time, if didn't put into array, would receive nil values
       #  recipe_list_url = Nokogiri::HTML(open(url))
-      #    if !recipe_list_url.search("h3.entry-title").empty?
-      #        {:name=>cat,:cat_url=>url}
-      #    end
+      #   if !recipe_list_url.search("h3.entry-title").empty?
+      #       food_cat << {:name=>cat,:cat_url=>url}
+      #   end
       end
+      #food_cat.uniq
+
   end
 
   def self.recipe_cat(cat_url)
