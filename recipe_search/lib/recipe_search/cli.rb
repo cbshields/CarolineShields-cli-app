@@ -8,7 +8,7 @@ class RecipeSearch::CLI
 
   def list_categories
     @categories = RecipeSearch::Scraper.categories
-    binding.pry
+
     puts "Search by Recipe Category"
     @categories.each.with_index(1) do |category, i|
       @cat_ubound_index = i

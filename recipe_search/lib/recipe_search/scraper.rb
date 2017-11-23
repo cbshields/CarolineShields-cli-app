@@ -5,23 +5,21 @@ class RecipeSearch::Scraper
     food_cat = []
     #pull categories from food recipe seach site
     doc = Nokogiri::HTML(open("http://foodrecipesearch.com/"))
+    doc.search(".td-mobile-content ul.sub-menu li").map do |category|
 
-
-    #pulls in the categories twice
-      doc.search("ul.sub-menu li").map do |category|
         cat = category.text
         url = category.at('a')['href']
-        {:name=>cat,:cat_url=>url}
-        #food_cat << {:name=>cat,:cat_url=>url}
 
-      #the below code adds a minute to processing time, if didn't put into array, would receive nil values
-      #  recipe_list_url = Nokogiri::HTML(open(url))
-      #   if !recipe_list_url.search("h3.entry-title").empty?
-      #       food_cat << {:name=>cat,:cat_url=>url}
-      #   end
+      if cat != "Soul Food Recipes" && cat != "Raw Food Recipes"
+          food_cat << {:name=>cat,:cat_url=>url}
+      else
+            recipe_list_url = Nokogiri::HTML(open(url))
+           if !recipe_list_url.search("h3.entry-title").empty?
+             food_cat << {:name=>cat,:cat_url=>url}
+           end
+        end
       end
-      #food_cat.uniq
-
+  food_cat
   end
 
   def self.recipe_cat(cat_url)
