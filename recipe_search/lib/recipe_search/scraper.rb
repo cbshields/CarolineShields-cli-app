@@ -1,5 +1,5 @@
 class RecipeSearch::Scraper
-
+  #why make them Class methods instead of instance methods
 
   def self.categories
     food_cat = []
