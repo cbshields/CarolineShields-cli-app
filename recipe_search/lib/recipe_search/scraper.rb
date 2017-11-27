@@ -1,5 +1,5 @@
 class RecipeSearch::Scraper
-  attr_accessor :recipe
+
 
   def self.categories
     food_cat = []
